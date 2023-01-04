@@ -1,0 +1,281 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        link(rel="stylesheet" type="text/css" href="CSS/main.css")
+        link(rel='shortcut icon' type='image/png' href='/Images/logo4.png')
+
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Dela+Gothic+One&family=Secular+One&family=Yeseva+One&display=swap" rel="stylesheet")
+
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+
+        title Lara AlOtaibi
+
+    script.
+        var sizeInterval;
+        var sections = ["home", "about", "skills", "projects", "papers", "timeline"]
+        $(document).ready(function(){
+            for(let i = 1; i<sections.length;i++)$("."+sections[i]).hide();
+
+            sizeInterval = setInterval(function(){$(".home").css("height", (parseInt(window.innerHeight)-160)+"px")}, 100)
+            setInterval(function(){$(".cursor").toggle()},500)
+
+            $("#linkedin").click(function(){window.open("https://www.linkedin.com/in/lara-alotaibi-380121242/",'_blank')})
+            $("#github").click(function(){window.open("https://github.com/Larito",'_blank')})
+            $("#resumeButton").click(function(){window.open("./cv.pdf",'_blank')})
+            $("#email").click(function(){
+                try{clearTimeout(emailTimeout)}
+                catch(e){}
+                var y= document.getElementById("hidURL");
+
+                y.style.position = 'relative';
+                y.style.top = 0;
+                y.style.left = 0;
+                y.style.width = '100%';
+                y.style.padding = 0;
+                y.style.border = 'none';
+                y.style.outline = 'none';
+                y.style.boxShadow = 'none';
+                y.style.background = 'transparent';
+                y.innerHTML="lara13otaibi@gmail.com";
+                document.execCommand("copy");
+                $(".prompt").show(100)
+                emailTimeout = setTimeout(function(){
+                    y.focus()
+                    y.select();
+                    y.setSelectionRange(0, 99999);
+                    document.execCommand("copy");
+                    emailTimeout = setTimeout(function(){$(".prompt").hide(100)}, 3000)
+                }, 200)
+            })
+
+            $("#logo").click(function(){changePage("home");})
+            $(".aboutBtn").click(function(){changePage("about")})
+            $(".skillsBtn").click(function(){changePage("skills")})
+            $(".projectsBtn").click(function(){changePage("projects")})
+            $(".papersBtn").click(function(){changePage("papers")})
+            $(".timelineBtn").click(function(){changePage("timeline")})
+
+            $(".projectCard").hover(
+                function(){
+                    $(this.children[0]).css("overflow-y","scroll")
+                    $(this.children[0]).animate({"height":"100%"}, 200)
+                },
+                function(){
+                    $(this.children[0]).css("overflow-y","hidden")
+                    $(this.children[0]).animate({"height":"17%"}, 200)
+                    this.children[0].scrollTo(0,0)
+                }
+            )
+        })
+        function changePage(page){
+            for(var i=0;i<sections.length;i++)if(sections[i]!=page)$("."+sections[i]).slideUp(500)
+            $("."+page).slideDown(500)
+        }
+
+    body
+        .prompt
+            span Email ID copied!
+            textarea(id="hidURL" style="display:block" readonly)
+        .header
+            div#logo(style="display:flex; flex-direction:column; justify-content:center")
+                img(src='/Images/logo3.png', width='100px')
+            #leftHeaderDiv
+                p.aboutBtn About
+                p.skillsBtn Skills
+                p.projectsBtn Projects
+                p.papersBtn Papers
+                p.timelineBtn Timeline
+                #resumeButton(style="display:flex; flex-direction:column; justify-content:center;")
+                    span Resume
+        .home.lineUp
+            span.heading ALOTAIBI
+            span.heading LARA
+            span.annotated >. computer & software engineer<span class='cursor'>|</span>
+
+            .logos
+                .customSeperator
+                img#github(src="/Images/github.png" width="30")
+                img#linkedin(src="/Images/linkedin.png" width="30")
+                img#email(src="/Images/email.png" width="30")
+            br
+            br
+            hr
+            #secondaryButtons
+                p.aboutBtn(style="margin-left:0") About
+                p.skillsBtn(style="margin-left:0") Skills
+                p.projectsBtn(style="margin-left:0") Projects
+                p.papersBtn(style="margin-left:0") Papers
+                p.timelineBtn(style="margin-left:0") Timeline
+        
+        .about.lineUp
+            span.annotated(style="width:75%;margin:auto") >. About Me<span class='cursor'>|</span>
+            .cardHolderDiv
+                .aboutCards
+                    p.
+                        Hi, Lara here! I am a <span style='color:#63fdd9'>software engineer</span> and a 
+                        <span style='color:#63fdd9'>computer engineer</span>, on a quest to digitally
+                        revolutionize the world! A warm welcome to you, dear visitor.
+                .aboutCards
+                    p.
+                        I'm currently an undergrad student at 
+                        <span style='color:#63fdd9'>Prince Mohammed Bin Fahd University, Saudi Arabia</span>. 
+                        I'm majoring in both Software Engineering as well as Computer Engineering</strong>.
+                .aboutCards
+                    p.
+                        My interests include <span style='color:#63fdd9'>Robotics</span>, 
+                        <span style='color:#63fdd9'>Cloud Computing</span> and 
+                        <span style='color:#63fdd9'>Artificial Intelligence</span>.
+                        
+                .aboutCards
+                    p.
+                        Did I tell you I really like <span style='color:#63fdd9'>psychology</span>? 
+                        I attended a Pyschology summer course at <span style='color:#63fdd9'>Harvard</span>.
+                        I also love <span style='color:#63fdd9'>swimming</span>! 
+                        Helps me relax in the daily hustle and bustle of life.
+
+        .skills.lineUp
+            span.annotated(style="width:75%;margin:auto") >. Skills<span class='cursor'>|</span>
+            .cardHolderDiv
+                .skillCard
+                    img(src="/Images/robot_head.png" width:20px)
+                    .skillText
+                        h1 Electronics and IoT
+                        p.
+                            I have extensive experience working with 
+                            <span style='color:#63fdd9'>Arduino</span> and 
+                            <span style='color:#63fdd9'>Raspberri Pi</span>. 
+                            My most notable projects in this field are the 
+                            <span style='color:#63fdd9'>Haptic VR glove</span> and 
+                            <span style='color:#63fdd9'>Electronic Xylophone</span>.
+
+                .skillCard
+                    img(src="/Images/tag.png" width:20px)
+                    .skillText
+                        h1 Flask, HTML, CSS and JS
+                        p.
+                            I mainly focus on <span style='color:#63fdd9'>Front End Development</span>. 
+                            My most notable projects in this field are the
+                            <span style='color:#63fdd9'>Inventory Management System</span> and 
+                            <span style='color:#63fdd9'>Gym Services Management</span> applications.
+                .skillCard
+                    img(src="/Images/3dPrinting.png" width:20px)
+                    .skillText
+                        h1 3D Modeling
+                        p.
+                            My 3D modeling skills come in handy for rapid prototyping 
+                            as well as for building full fledged products. I'm well versed in
+                            <span style='color:#63fdd9'>TinkerCad, Fusion360 and AutoCad</span>.
+                .skillCard
+                    img(src="/Images/programming.png" width:20px)
+                    .skillText
+                        h1 Java, Python
+                        p.
+                            I'm quite comfortable working with 
+                            <span style='color:#63fdd9'>Java</span> and <span style='color:#63fdd9'>Python</span>. 
+                            By extension, I am able to participate in projects 
+                            that use frameworks built around the aforementioned languages.
+
+
+        .projects.lineUp
+            span.annotated(style="width:75%;margin:auto") >. Projects<span class='cursor'>|</span>
+            .cardHolderDiv
+                .projectCard(style="background-image:url('/Images/haptic.png')")
+                    .projectText
+                        h1 Haptic VR Glove
+                        br
+                        p.
+                            A glove was constructed using IMUs and flex sensors which collected hand movement data. 
+                            The data was fed to a Unity environment, where a virtual hand reflects the hand 
+                            movement data collected from the glove. 
+                            Events in the game result in haptic feedback on the glove.
+                        p(style="color:red") Tools Used: Arduino, Unity
+                .projectCard(style="background-image:url('/Images/ims.jpg')")
+                    .projectText
+                        h1 Inventory Management System
+                        br
+                        p.
+                            Items are recognized by a raspberry pi through live video feed from a webcam. Users 
+                            can check-in and check-out items. Inventory database is updated accordingly. 
+                            Inventory, stock, check-outs and user information is displayed on a web application. 
+                            New items can be registered by an admin using the 'Register Item' feature. 
+                            Images of new items are captured which are used to retrain the deep learning model. 
+                            Designed a 3D printed wall mounting case for the system using Fusion360.
+                        p(style="color:red") Tools Used: Keras, OpenCV, NodeJS, Raspberry Pi
+                .projectCard(style="background-image:url('/Images/xylo.jpg')")
+                    .projectText
+                        h1 Electronic Xylophone
+                        br
+                        p.
+                            A system that is designed to teach beginners how to use a xylophone. 
+                            An array of momentary switches  correspond  to a note on the xylophone. 
+                            LCD displays the note played by the user.
+                        p(style="color:red") Tools Used: Arduino
+                .projectCard(style="background-image:url('/Images/gym.jpg')")
+                    .projectText
+                        h1 Gym Services Management
+                        br
+                        p.
+                            Web application for managing gym services.
+                            Users can login and book various services provided by the gym.
+                        p(style="color:red") Tools Used: HTML, CSS, JS
+                .projectCard(style="background-image:url('/Images/os.jpg')")
+                    .projectText
+                        h1 OS Algorithms Simulations
+                        br
+                        p.
+                            Web application that displays interactive simulations for Operating Systems algorithms.
+                            Simulations include Job Scheduling, Memory Page Replacement, Round Robin, etc.
+                        p(style="color:red") Tools Used: NodeJS, HTML, CSS, JS
+
+                .projectCard(style="background-image:url('/Images/plane.jpg')")
+                    .projectText
+                        h1 Airline Management System
+                        br
+                        p.
+                            Web application for airline management <br>
+                            The backend is managed by a Flask server. SQLite database with seven entities manages the entire airline system
+                        p(style="color:red") Tools Used: Flask, HTML, CSS, JS
+
+        .papers.lineUp
+            span.annotated(style="width:75%;margin:auto") >. Papers<span class='cursor'>|</span>
+            span.paperText(style="margin:auto") Lara Alotaibi, et al, <span style='color:#63fdd9'><em>“Low Cost and Scalable Haptic VR Glove”</em></span>, International Conference on Computational Intelligence and Communication Networks, CICN, Dec 2022, Khobar KSA
+                
+        .timeline.lineUp
+            span.annotated(style="width:75%;margin:auto") >. Timeline<span class='cursor'>|</span>
+            .timeLineContainer.lineUp(style="margin-bottom:100px")
+                .eventContainer.left.lineUp
+                    .content
+                        h2 May 2024
+                        p Expected graduation date
+
+                .eventContainer.right.lineUp
+                    .content
+                        h2 June - August, 2022
+                        p Robotics Lab at Prince Mohmamed Bin Fahd University, Robotics Engineer Intern
+
+                .eventContainer.left.lineUp
+                    .content
+                        h2 September 2021 - Present
+                        p Mentor in the MiSK Mentoring Program
+
+                .eventContainer.right.lineUp
+                    .content
+                        h2 August 2020
+                        p Started undergraduate studies at Prince Mohammed Bin Fahd University
+
+                .eventContainer.left.lineUp
+                    .content
+                        h2 August 2020
+                        p Yale, Intro. to Psychology Course
+
+                .eventContainer.right.lineUp
+                    .content
+                        h2 August 2018
+                        p Harvard Summer School, Introduction to Psychology Course
+                        p Harvard Summer School, Law and Psychology Course
